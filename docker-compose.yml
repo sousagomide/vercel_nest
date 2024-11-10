@@ -1,0 +1,20 @@
+version: '27.3.1'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    working_dir: /app
+    networks:
+      - app
+    ports:
+      - 3000:3000
+    command: [sh, -c, 'npm run start:dev']
+    volumes:
+      - .:/app:delegated
+      - /app/node_modules
+
+networks:
+  app:
